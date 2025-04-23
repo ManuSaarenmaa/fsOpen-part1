@@ -52,6 +52,10 @@ const App = () => {
       <button onClick={addNeutral}>neutral</button>
       <button onClick={addBad}>bad</button>
       <Statistics good={good} neutral={neutral} bad={bad} all={all} />
+      <button onClick={addGood}>good</button>
+      <button onClick={addNeutral}>neutral</button>
+      <button onClick={addBad}>bad</button>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all} />
     </div>
   )
 }
