@@ -11,22 +11,30 @@ const Statistics = ({ good, neutral, bad, all }) => {
     return (good / all) * 100
   }
 
+  const StatisticLine = ({text, value}) => {
+    return (
+      <p>{text} {value}</p>
+    )
+  }
+  
   if (all === 0) {
     return <p>No feedback given</p>
   }
 
   return (
     <div>
-      <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {all}</p>
-      <p>average {calculateAverage()}</p>
-      <p>positive {calcilatePositive()} %</p>
+      <h1>statistic</h1>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={all} />
+      <StatisticLine text="average" value={calculateAverage()} />
+      <StatisticLine text="positive" value={`${calcilatePositive()} %`} />
     </div>
   )
 }
+
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -52,9 +60,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={addGood}>good</button>
-      <button onClick={addNeutral}>neutral</button>
-      <button onClick={addBad}>bad</button>
+      <Button onClick={addGood} text='good' />
+      <Button onClick={addNeutral} text='neutral' />
+      <Button onClick={addBad} text='bad' />
       <Statistics good={good} neutral={neutral} bad={bad} all={all} />
     </div>
   )
