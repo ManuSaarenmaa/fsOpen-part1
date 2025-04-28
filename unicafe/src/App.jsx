@@ -1,16 +1,20 @@
 import { useState } from 'react'
 
+// Component to display statistics
 const Statistics = ({ good, neutral, bad, all }) => {
+  // Function to calculate the average score
   const calculateAverage = () => {
     if (all === 0) return 0
     return (good * 1 + neutral * 0 + bad * -1) / all;
   }
   
+ 
   const calcilatePositive = () => {
     if (all === 0) return 0
     return (good / all) * 100
   }
 
+  // Component to display a single statistic line
   const StatisticLine = ({text, value}) => {
     return (
       <tr>
@@ -20,10 +24,12 @@ const Statistics = ({ good, neutral, bad, all }) => {
     )
   }
   
+  // If no feedback is given, display a message
   if (all === 0) {
     return <p>No feedback given</p>
   }
 
+  // Render the statistics table
   return (
     <div>
       <h1>statistics</h1>
@@ -41,14 +47,18 @@ const Statistics = ({ good, neutral, bad, all }) => {
   )
 }
 
+
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
+
 const App = () => {
+  // State variables to track feedback counts
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
   const [all, SetAll] = useState(0)
 
+  // Handlers to update state for each feedback type
   const addGood = () => {
     SetAll(all + 1)
     setGood(good + 1)
@@ -64,6 +74,7 @@ const App = () => {
     setBad(bad + 1)
   }
 
+  
   return (
     <div>
       <h1>give feedback</h1>

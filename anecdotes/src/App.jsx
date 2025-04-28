@@ -1,5 +1,18 @@
 import { useState } from 'react'
 
+// Function to change the currently displayed anecdote
+const changeAnecdote = (anecdotes, setSelected) => {
+  const randomAnecdote = Math.floor(Math.random() * anecdotes.length) //generate random index
+  setSelected(randomAnecdote)// update selected anecdote index
+}
+
+const mostVotes = (votes) => {
+  const maxVotes = Math.max(...votes) // Finds max number of votes
+  const index = votes.indexOf(maxVotes) // Find index of the anecdote with the most votes
+  return index
+}
+
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -11,12 +24,25 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-   
+ 
   const [selected, setSelected] = useState(0)
 
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
+
+  const copy = [...votes]
+  copy[selected] += 1
+
+ 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
+      <p>has {votes[selected]} votes</p>
+      <button onClick={() => setVotes(copy)}>vote</button>
+      <button onClick={() => changeAnecdote(anecdotes, setSelected)}>next anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostVotes(votes)]}</p>
+      <p>has {votes[mostVotes(votes)]} votes</p>
     </div>
   )
 }
